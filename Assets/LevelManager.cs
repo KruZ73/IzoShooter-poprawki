@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    private int maxZombies = 5;
     public GameObject zombiePefab;
     public GameObject healPrefab;
 
@@ -19,7 +21,15 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameObject.FindGameObjectsWithTag("Enemy").Length < 1) 
+
+        var zombies = GameObject.FindGameObjectsWithTag("Enemy");
+        
+        if (zombies.Count() > maxZombies)
+        {
+            GetRandomSpawnPosition();
+        }
+
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length < 1) 
         {
             Instantiate(zombiePefab, GetRandomSpawnPosition(), Quaternion.identity);
         }
@@ -40,7 +50,7 @@ public class LevelManager : MonoBehaviour
             spawnPoint *= UnityEngine.Random.Range(10f, 20f);
             spawnPoint += player.transform.position;
         }
-        //TODO: check this shit
+        
         while (Physics.CheckSphere(new Vector3(spawnPoint.x, 1, spawnPoint.z), 0.9f));
 
         return spawnPoint;

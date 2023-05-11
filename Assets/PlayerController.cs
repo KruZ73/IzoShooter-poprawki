@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -68,9 +70,12 @@ public class PlayerController : MonoBehaviour
     }
     void Die()
     {
-        GetComponent<BoxCollider>().enabled = false;
-        transform.Translate(Vector3.up);
-        transform.Rotate(Vector3.right * -90);
+
+        SceneManager.LoadScene("Koniec");
+
+      //GetComponent<BoxCollider>().enabled = false;
+     // transform.Translate(Vector3.up);
+     // transform.Rotate(Vector3.right * -90);
         
         //Time.timeScale = 0;
     }

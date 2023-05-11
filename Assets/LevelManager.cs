@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour
             GetRandomSpawnPosition();
         }
 
-        if (GameObject.FindGameObjectsWithTag("Enemy").Length < 1) 
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length < 1)
         {
             Instantiate(zombiePefab, GetRandomSpawnPosition(), Quaternion.identity);
         }

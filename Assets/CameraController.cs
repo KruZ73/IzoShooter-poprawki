@@ -4,25 +4,18 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Vector3 playerOffset;
-    public float smoothTime = 0.3f;
-    private GameObject player;
-    private Vector3 velocity;
-
-
+    Transform player;
+    Vector3 cameraOffset;
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
-        velocity = Vector3.zero;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        cameraOffset = transform.position - player.position;
     }
-
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 targetPosition = player.transform.position + playerOffset;
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
-
+        transform.position = player.position + cameraOffset;
     }
 }
